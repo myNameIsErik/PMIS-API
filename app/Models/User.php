@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -18,6 +19,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $table = 'user';
+
+    public $timestamps = false;
     
     protected $fillable = [
         'name',
@@ -25,7 +28,8 @@ class User extends Authenticatable
         'image',
         'password',
         'role_id',
-        'is_active'
+        'is_active',
+        'token'
     ];
 
     /**
@@ -46,6 +50,22 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function generateToken()
+    {
+        $token = Str::random(60); // Menghasilkan string acak sepanjang 60 karakter
+        $this->api_token = $token; // Simpan token yang di-hash ke kolom api_token di tabel pengguna
+        $this->save();
+
+        return $this->api_token;
+    }
+
+    // public function findToken($tokenName)
+    // {
+    //     return $this->tokens()
+    //         ->where('token', $tokenName)
+    //         ->first();
+    // }
 
     public function roles()
     {
