@@ -147,8 +147,23 @@ class FormulirPengajuanNIP extends Model
         'adendum',
     ];
 
-    public function banks()
+    public function user()
     {
-        return $this->belongsTo(Bank::class, 'bank', 'id');
+        return $this->belongsTo(User::class, 'email_user', 'email');
+    }
+    
+    public function pin()
+    {
+        return $this->belongsTo(DataPin::class, 'id_formulir', 'id_formulir');
+    }
+    
+    public function rekanan()
+    {
+        return $this->belongsTo(Rekanan::class, 'id_rekanan', 'id');
+    }
+
+    public function keahlian()
+    {
+        return $this->belongsTo(KelompokKeahlian::class, 'kelompok_keahlian', 'nama');
     }
 }

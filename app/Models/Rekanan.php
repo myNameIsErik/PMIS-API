@@ -28,4 +28,14 @@ class Rekanan extends Model
         'status_profile',
         'catatan'
     ];
+
+    public function emailUser()
+    {
+        return $this->belongsTo(User::class, 'email_user', 'email');
+    }
+
+    public function pengajuanNIP()
+    {
+        return $this->hasOne(FormulirPengajuanNIP::class, 'id_rekanan', 'id');
+    }
 }

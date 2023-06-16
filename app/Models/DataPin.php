@@ -24,4 +24,9 @@ class DataPin extends Model
     {
         return $this->hasOne(Invoice::class, 'pin', 'id');
     }
+
+    public function pengajuannip()
+    {
+        return $this->hasOne(FormulirPengajuanNIP::class, 'id_formulir', 'id_formulir');
+    }
 }

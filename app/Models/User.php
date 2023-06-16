@@ -67,8 +67,18 @@ class User extends Authenticatable
     //         ->first();
     // }
 
-    public function roles()
+    public function role()
     {
         return $this->belongsTo(UserRole::class, 'role_id', 'id');
+    }
+
+    public function rekanans()
+    {
+        return $this->hasMany(Rekanan::class, 'email_user', 'id');
+    }
+
+    public function nips()
+    {
+        return $this->hasMany(FormulirPengajuanNIP::class, 'email_user', 'id');
     }
 }

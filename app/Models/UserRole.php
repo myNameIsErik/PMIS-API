@@ -22,6 +22,6 @@ class UserRole extends Model
 
     public function users()
     {
-        return $this->hasOne(User::class, 'role_id', 'id');
+        return $this->hasMany(User::class, 'role_id', 'id');
     }
 }

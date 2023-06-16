@@ -19,4 +19,9 @@ class KelompokKeahlian extends Model
     protected $fillable = [
         'nama'
     ];
+
+    public function nip()
+    {
+        return $this->hasMany(FormulirPengajuanNIP::class, 'kelompok_keahlian', 'id');
+    }
 }
